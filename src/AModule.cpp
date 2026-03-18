@@ -177,11 +177,11 @@ bool AModule::handleUserEvent(GdkEventButton* const& e) {
       gtk_widget_show_all(GTK_WIDGET(menu_));
 	  gtk_menu_popup_at_widget(
           GTK_MENU(menu_),
-          event_box_.gobj(),                  // anchor widget
-          GDK_GRAVITY_SOUTH_WEST,             // attach to bottom-left of button
-          GDK_GRAVITY_NORTH_WEST,             // menu grows downward
+          GTK_WIDGET(event_box_.gobj()),
+          GDK_GRAVITY_SOUTH_WEST,
+          GDK_GRAVITY_NORTH_WEST,
           reinterpret_cast<GdkEvent*>(e)
-      );      // Manually reset prelight to make sure the module doesn't stay in a hover state
+      );
       if (auto* module = event_box_.get_child(); module != nullptr) {
         module->unset_state_flags(Gtk::StateFlags::STATE_FLAG_PRELIGHT);
       }
